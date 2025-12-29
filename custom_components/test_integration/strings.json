@@ -1,0 +1,13 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Switch Conf",
+                "description": "The Example integration needs a host",
+                "data": {
+                    "host": "The Host"
+                }
+            }
+        }
+    }
+}

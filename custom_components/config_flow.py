@@ -5,7 +5,7 @@ import voluptuous as vol
 
 DATA_SCHEMA = vol.Schema({("host"): str})
 
-class ExampleConfigFlow(config_entries.ConfigFlow, domain="test_integration"):
+class ConfigFlow(config_entries.ConfigFlow, domain="test_integration"):
      VERSION = 1
 
      async def async_step_user(self, user_input=None):

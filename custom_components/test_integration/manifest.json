@@ -1,0 +1,9 @@
+{
+    "domain": "test_integration",
+    "documentation": "https://github.com/VLScarabello/TestIntegration",
+    "codeowners": ["@VLScarabello"],
+    "issue_tracker": "https://github.com/VLScarabello/TestIntegration/issues",
+    "name": "Test Integration",
+    "version": "0.1.0",
+    "integration_type": "device"
+}

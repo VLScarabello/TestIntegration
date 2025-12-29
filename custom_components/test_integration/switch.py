@@ -1,15 +1,14 @@
 from homeassistant.components.switch import SwitchEntity
 
-def setup_platform(
-    hass,
-    config,
-    add_entities,
-    discovery_info
+async def async_setup_entry(
+    hass: HomeAssistant,
+    config_entry: HubConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ):
     """Set up the test switch"""
 
     # Add devices
-    add_entities([MySwitch()])
+    async_add_entities([MySwitch()])
 
 class MySwitch(SwitchEntity):
 

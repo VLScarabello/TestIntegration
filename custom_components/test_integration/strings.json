@@ -1,13 +1,22 @@
 {
-    "config": {
-        "step": {
-            "user": {
-                "title": "Switch Conf",
-                "description": "The Example integration needs a host",
-                "data": {
-                    "host": "The Host"
-                }
-            }
-        }
+  "title": "Test Switch",
+  "config": {
+    "flow_title": "Test Switch {name}",
+    "step": {
+      "test": {
+        "data": {
+          "ip_address": "IP Address",
+          "username": "Camera Account - Username",
+          "password": "Camera Account - Password"
+        },
+        "description": "Your password(s) changed. Please enter up to date passwords.\n\nCamera account is created via Tapo app at:\nCamera Settings > Advanced Settings > Camera Account.\n\nYou can test if these credentials work via rtsp stream, for example VLC using link\nrtsp://username:password@IP Address:554/stream1"
+      }
+    },
+    "error": {
+      "unknown": "Unknown error"
+    },
+    "abort": {
+      "already_configured": "IP address already configured"
     }
+  }
 }

@@ -5,5 +5,7 @@
     "issue_tracker": "https://github.com/VLScarabello/TestIntegration/issues",
     "name": "Test Integration",
     "version": "0.1.0",
-    "integration_type": "device"
+    "integration_type": "device",
+    "config_flow": true,
+    "homeassistant": "2024.1.0"
 }

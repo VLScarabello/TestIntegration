@@ -1,16 +1,30 @@
 
-
-from __future__ import annotations
-
 import asyncio
+from homeassistant.core import HomeAssistant
 
-from homeassistant.helpers.discovery import load_platform
-from homeassistant.const import Platform
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import (
+    CONF_IP_ADDRESS,
+    CONF_USERNAME,
+    CONF_PASSWORD,
+)
+import homeassistant.helpers.entity_registry
+from .const import DOMAIN
 
-DOMAIN = "test_integration"
-PLATFORMS = [Platform.SWITCH]
-
-async def async_setup_entry(hass, entry):
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-
+async def async_setup(hass: HomeAssistant, config: dict):
+    """Set up the Test component from YAML."""
     return True
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
+    hass.data.setdefault(DOMAIN, {})
+    host = entry.data.get(CONF_IP_ADDRESS)
+    username = entry.data.get(CONF_USERNAME)
+    password = entry.data.get(CONF_PASSWORD)
+    await hass.async_create_task(
+            hass.config_entries.async_forward_entry_setups(
+                entry,
+                [
+                    "switch"
+                ],
+            )
+        )

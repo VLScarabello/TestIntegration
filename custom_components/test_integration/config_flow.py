@@ -1,24 +1,44 @@
-
-from homeassistant import config_entries
-
 import voluptuous as vol
+from homeassistant.config_entries import HANDLERS, ConfigFlow
+from homeassistant.const import (
+    CONF_IP_ADDRESS,
+    CONF_USERNAME,
+    CONF_PASSWORD
+)
 
-DATA_SCHEMA = vol.Schema({("host"): str})
+from .const import (
+    DOMAIN,
+)
 
-class ConfigFlow(config_entries.ConfigFlow, domain="test_integration"):
-     VERSION = 1
 
-     async def async_step_user(self, user_input=None):
-        """Handle the initial step."""
-        # This goes through the steps to take the user through the setup process.
-        # Using this it is possible to update the UI and prompt for additional
-        # information. This example provides a single form (built from `DATA_SCHEMA`),
-        # and when that has some validated input, it calls `async_create_entry` to
-        # actually create the HA config entry. Note the "title" value is returned by
-        # `validate_input` above.
-        errors = {}
+@HANDLERS.register(DOMAIN)
+class FlowHandler(ConfigFlow):
+    """Handle a config flow."""
 
-        # If there is no user input or there were errors, show the form again, including any errors that were found with the input.
+    def __init__(self):
+        pass
+
+    async def async_step_test(self, user_input=None):
+        """Perform reauth upon an API authentication error."""
+        self.test_entry = self.hass.config_entries.async_get_entry(
+            self.context["entry_id"]
+        )
+        
         return self.async_show_form(
-            step_id="user", data_schema=DATA_SCHEMA, errors=errors
+            step_id="test",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(
+                        CONF_USERNAME, description={"suggested_value": "Paolo"}
+                    ): str,
+                    vol.Required(
+                        CONF_PASSWORD, description={"suggested_value": "Paolo"}
+                    ): str,
+                    vol.Required(
+                        CONF_IP_ADDRESS, description={"suggested_value": "192.168.1.15"}
+                    ): str,
+                }
+            ),
+            errors={},
+            last_step=True,
         )

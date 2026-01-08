@@ -20,6 +20,8 @@ class FlowHandler(ConfigFlow):
 
     async def async_step_user(self, user_input=None):
         """Handle a flow initialized by the user."""
+        if user_input is not None:
+            return self.async_create_entry(title="Test Switch", data=user_input)
         return await self.async_step_test()
 
     async def async_step_test(self, user_input=None):

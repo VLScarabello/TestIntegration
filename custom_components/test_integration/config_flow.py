@@ -16,13 +16,14 @@ class FlowHandler(ConfigFlow):
     """Handle a config flow."""
 
     def __init__(self):
-        pass
+        ConfigFlow.__init__(self)
+
+    async def async_step_user(self, user_input=None):
+        """Handle a flow initialized by the user."""
+        return await self.async_step_test()
 
     async def async_step_test(self, user_input=None):
         """Perform reauth upon an API authentication error."""
-        self.test_entry = self.hass.config_entries.async_get_entry(
-            self.context["entry_id"]
-        )
         
         return self.async_show_form(
             step_id="test",

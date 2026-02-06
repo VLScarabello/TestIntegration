@@ -20,12 +20,12 @@ class FlowHandler(ConfigFlow):
 
     async def async_step_user(self, user_input=None):
         """Handle a flow initialized by the user."""
-        if user_input is not None:
-            return self.async_create_entry(title="Test Switch", data=user_input)
-        return await self.async_step_test()
+        return await self.async_step_test(user_input)
 
     async def async_step_test(self, user_input=None):
         """Perform reauth upon an API authentication error."""
+        if user_input is not None:
+            return self.async_create_entry(title="Test Switch", data=user_input)
         
         return self.async_show_form(
             step_id="test",
